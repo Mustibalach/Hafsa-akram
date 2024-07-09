@@ -1,0 +1,63 @@
+function setup() {
+  createCanvas(800, 800);
+  background(255);  // White background
+
+  // Draw background message
+  textSize(32);
+  fill(0);
+  textAlign(CENTER, CENTER);
+  text("For Hafsa Akram", width / 2, 50);
+
+  let tulipCount = 10;  // Number of tulips in the bouquet
+
+  for (let i = 0; i < tulipCount; i++) {
+    let x = random(100, width - 100);
+    let y = random(height / 2, height - 100);
+    drawTulip(x, y, random(60, 100));
+  }
+}
+
+function drawTulip(x, y, size) {
+  // Draw stem
+  stroke(34, 139, 34);  // Green color
+  strokeWeight(4);
+  line(x, y, x, y + size * 2);
+
+  // Draw leaves
+  noStroke();
+  fill(34, 139, 34);  // Green color
+  ellipse(x - size / 4, y + size, size / 2, size);
+  ellipse(x + size / 4, y + size, size / 2, size);
+
+  // Draw petals
+  fill(255, 0, 0);  // Red color
+  beginShape();
+  vertex(x, y);
+  bezierVertex(x - size / 3, y - size / 2, x - size / 3, y + size / 4, x, y + size / 2);
+  bezierVertex(x + size / 3, y + size / 4, x + size / 3, y - size / 2, x, y);
+  endShape(CLOSE);
+
+  fill(200, 0, 0);  // Darker red for inner petals
+  beginShape();
+  vertex(x, y);
+  bezierVertex(x - size / 5, y - size / 3, x - size / 5, y + size / 6, x, y + size / 3);
+  bezierVertex(x + size / 5, y + size / 6, x + size / 5, y - size / 3, x, y);
+  endShape(CLOSE);
+
+  // Adding highlights to petals for realism
+  fill(255, 100, 100);
+  noStroke();
+  beginShape();
+  vertex(x, y);
+  bezierVertex(x - size / 4, y - size / 3, x, y - size / 3, x, y);
+  endShape(CLOSE);
+
+  beginShape();
+  vertex(x, y);
+  bezierVertex(x + size / 4, y - size / 3, x, y - size / 3, x, y);
+  endShape(CLOSE);
+}
+
+function draw() {
+  // No need to draw continuously for this static image
+}
